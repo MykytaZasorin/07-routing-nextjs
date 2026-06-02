@@ -1,8 +1,11 @@
 /* Новий клас для обгортки всього сайдбара */
 .sidebarContainer {
   width: 260px;
-  min-width: 260px;
+  max-width: 200px;
   height: 100vh;
+  position: sticky;
+  top: 0;
+  overflow-y: auto;
   background-color: #1e1e1e; /* Темний графітовий фон */
   padding: 24px 16px;
   box-sizing: border-box;
