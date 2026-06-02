@@ -1,31 +1,14 @@
 import { ReactNode } from "react";
 
+// 1. Залишаємо ТІЛЬКИ children. Жодних sidebar чи modal тут бути не повинно!
 interface NotesLayoutProps {
   children: ReactNode;
-  sidebar: ReactNode;
-  modal: ReactNode;
 }
 
-export default function NotesLayout({
-  children,
-  sidebar,
-  modal,
-}: NotesLayoutProps) {
+export default function NotesLayout({ children }: NotesLayoutProps) {
   return (
-    <div
-      style={{
-        display: "flex",
-        minHeight: "100vh",
-        backgroundColor: "#f8f9fa",
-      }}
-    >
-      {sidebar}
-
-      <div style={{ flex: 1, display: "flex", flexDirection: "column" }}>
-        {children}
-      </div>
-
-      {modal}
+    <div style={{ minHeight: "100vh", backgroundColor: "#f8f9fa" }}>
+      {children}
     </div>
   );
 }
