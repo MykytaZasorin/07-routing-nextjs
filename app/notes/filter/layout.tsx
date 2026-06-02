@@ -1,22 +1,32 @@
-import { FC, ReactNode } from "react";
+import { ReactNode } from "react";
 
 interface FilterLayoutProps {
-  children: ReactNode;
-  sidebar: ReactNode;
-  modal: ReactNode; // 👈 Додаємо сюди
+  children: ReactNode; // Сюди потрапить сторінка з папки [tag]
+  sidebar: ReactNode; // Сюди потрапить слот @sidebar
+  modal: ReactNode; // Сюди потрапить слот @modal
 }
 
-const FilterLayout: FC<FilterLayoutProps> = ({ children, sidebar, modal }) => {
+export default function FilterLayout({
+  children,
+  sidebar,
+  modal,
+}: FilterLayoutProps) {
   return (
-    <div style={{ display: "flex", width: "100%" }}>
-      <aside>{sidebar}</aside>
+    <div style={{ display: "flex", minHeight: "100vh", width: "100%" }}>
+      {sidebar}
 
-      <main style={{ flex: 1 }}>{children}</main>
+      <div
+        style={{
+          flex: 1,
+          display: "flex",
+          flexDirection: "column",
+          backgroundColor: "#f8f9fa",
+        }}
+      >
+        {children}
+      </div>
 
-      {/* 🔮 Виводимо модалку тут: */}
       {modal}
     </div>
   );
-};
-
-export default FilterLayout;
+}
