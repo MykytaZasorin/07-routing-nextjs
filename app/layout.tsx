@@ -1,13 +1,8 @@
-import "./globals.css";
 import React from "react";
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
 import { TanStackProvider } from "@/components/TanStackProvider/TanStackProvider";
-
-export const metadata = {
-  title: "NoteHub",
-  description: "Manage your personal notes efficiently",
-};
+import styles from "./globals.module.css";
 
 export default function RootLayout({
   children,
@@ -16,10 +11,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>
+      <body className={styles["app-container"]}>
         <TanStackProvider>
           <Header />
-          <main>{children}</main>
+          <main className={styles["main-content"]}>{children}</main>
           <Footer />
         </TanStackProvider>
       </body>

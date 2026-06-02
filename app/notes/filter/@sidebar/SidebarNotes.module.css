@@ -1,3 +1,14 @@
+/* Новий клас для обгортки всього сайдбара */
+.sidebarContainer {
+  width: 260px;
+  min-width: 260px;
+  height: 100vh;
+  background-color: #1e1e1e; /* Темний графітовий фон */
+  padding: 24px 16px;
+  box-sizing: border-box;
+  border-right: 1px solid #333;
+}
+
 .menuList {
   list-style-type: none;
   margin: 0;
@@ -5,19 +16,20 @@
 }
 
 .menuItem {
-  margin-bottom: 16px;
+  margin-bottom: 8px; /* Трохи зменшив відступ для акуратності */
 }
 
 .menuLink {
   text-decoration: none;
-  color: white;
+  color: #b5b5b5; /* Зробимо текст трохи приглушеним у спокійному стані */
   font-size: 16px;
   display: block;
-  padding: 8px 16px;
-  transition: background-color 0.3s ease;
+  padding: 10px 16px;
+  border-radius: 6px; /* Закруглимо кути посилань */
+  transition: all 0.2s ease;
 }
 
 .menuLink:hover {
-  background-color: #444;
-  color: #ddd;
+  background-color: #333333; /* Світліший сірий при наведенні */
+  color: white; /* Яскравий білий при наведенні */
 }
