@@ -1,5 +1,5 @@
-import { redirect } from "next/navigation";
+import NotesClient from "./Notes.client";
 
 export default function NotesRootPage() {
-  redirect("/notes/filter/all");
+  return <NotesClient />;
 }
