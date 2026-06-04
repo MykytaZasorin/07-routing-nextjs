@@ -1,20 +1,14 @@
 import { ReactNode } from "react";
 
 interface FilterLayoutProps {
-  children: ReactNode; // Сюди потрапить сторінка з папки [tag]
-  sidebar: ReactNode; // Сюди потрапить слот @sidebar
-  modal: ReactNode; // Сюди потрапить слот @modal
+  children: ReactNode;
+  sidebar: ReactNode;
 }
 
-export default function FilterLayout({
-  children,
-  sidebar,
-  modal,
-}: FilterLayoutProps) {
+export default function FilterLayout({ children, sidebar }: FilterLayoutProps) {
   return (
     <div style={{ display: "flex", minHeight: "100vh", width: "100%" }}>
       {sidebar}
-
       <div
         style={{
           flex: 1,
@@ -25,8 +19,6 @@ export default function FilterLayout({
       >
         {children}
       </div>
-
-      {modal}
     </div>
   );
 }

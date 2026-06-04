@@ -4,12 +4,17 @@ import css from "./SidebarNotes.module.css";
 const TAGS = ["all", "Todo", "Work", "Personal", "Meeting", "Shopping"];
 
 interface SidebarPageProps {
-  params: Promise<{ tag: string }>;
+  params: Promise<{
+    slug: string[]; // 👈 Теж міняємо на масив slug
+  }>;
 }
 
 export default async function SidebarPage({ params }: SidebarPageProps) {
   const resolvedParams = await params;
-  const activeTag = decodeURIComponent(resolvedParams.tag);
+
+  // Дістаємо поточний тег з масиву slug
+  const rawTag = resolvedParams.slug?.[0] || "all";
+  const activeTag = decodeURIComponent(rawTag);
 
   return (
     <aside className={css.sidebarContainer}>

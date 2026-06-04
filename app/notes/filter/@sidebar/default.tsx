@@ -1,7 +1,9 @@
-import SidebarPage from "./[tag]/page";
+import SidebarPage from "./[...slug]/page";
 
 interface SidebarDefaultProps {
-  params: Promise<{ tag: string }>;
+  params: Promise<{
+    slug: string[]; // 👈 Змінюємо тип на масив
+  }>;
 }
 
 export default function SidebarDefault({ params }: SidebarDefaultProps) {

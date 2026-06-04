@@ -34,6 +34,7 @@ const NoteList: FC<NoteListProps> = ({ notes }) => {
           <div className={css.footer}>
             <span className={css.tag}>{note.tag}</span>
 
+            {/* 📜 СУВОРО ЗА ТЗ: Звичайне посилання на динамічний маршрут */}
             <Link href={`/notes/${note.id}`} className={css.viewDetails}>
               View details
             </Link>

@@ -13,7 +13,6 @@ import { fetchNotes, FetchNotesResponse } from "@/lib/api/notes";
 
 const PER_PAGE = 12;
 
-// Додаємо типізацію пропсів
 interface NotesClientProps {
   tag?: string;
 }
@@ -29,19 +28,17 @@ export default function NotesClient({ tag }: NotesClientProps) {
     setSearch(value);
   }, 500);
 
-  const { data, isLoading, isFetching, isError } = useQuery<FetchNotesResponse>(
-    {
-      queryKey: ["notes", page, search, tag],
-      queryFn: () => fetchNotes({ page, perPage: PER_PAGE, search, tag }),
-      placeholderData: () =>
-        queryClient.getQueryData<FetchNotesResponse>([
-          "notes",
-          page - 1,
-          search,
-          tag,
-        ]),
-    },
-  );
+  const { data, isLoading, isError } = useQuery<FetchNotesResponse>({
+    queryKey: ["notes", page, search, tag],
+    queryFn: () => fetchNotes({ page, perPage: PER_PAGE, search, tag }),
+    placeholderData: () =>
+      queryClient.getQueryData<FetchNotesResponse>([
+        "notes",
+        page - 1,
+        search,
+        tag,
+      ]),
+  });
 
   return (
     <div>
@@ -59,9 +56,9 @@ export default function NotesClient({ tag }: NotesClientProps) {
         </div>
       </header>
 
-      {(isLoading || isFetching) && (
-        <div className={css.centeredLoading}>Loading...</div>
-      )}
+      {/* Лоадер показується тільки під час першого завантаження, сітку не ламає */}
+      {isLoading && <div className={css.centeredLoading}>Loading...</div>}
+
       {isError && (
         <div className={css.centeredLoading}>Something went wrong</div>
       )}

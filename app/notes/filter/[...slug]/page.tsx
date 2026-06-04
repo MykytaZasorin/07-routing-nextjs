@@ -2,14 +2,15 @@ import NotesClient from "../../Notes.client";
 
 interface TagPageProps {
   params: Promise<{
-    tag: string;
+    slug: string[];
   }>;
 }
 
 export default async function TagPage({ params }: TagPageProps) {
   const resolvedParams = await params;
 
-  const decodedTag = decodeURIComponent(resolvedParams.tag);
+  const rawTag = resolvedParams.slug?.[0] || "all";
+  const decodedTag = decodeURIComponent(rawTag);
 
   const currentTag = decodedTag === "all" ? undefined : decodedTag;
 
