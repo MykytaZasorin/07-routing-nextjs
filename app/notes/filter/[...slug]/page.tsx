@@ -1,4 +1,4 @@
-import NotesClient from "../../Notes.client";
+import NotesClient from "./Notes.client"; // 🚀 Змінили шлях на локальний файл
 
 interface TagPageProps {
   params: Promise<{

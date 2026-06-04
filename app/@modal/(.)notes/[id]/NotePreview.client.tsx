@@ -9,7 +9,7 @@ interface NoteDetailsProps {
   noteId: string;
 }
 
-export default function NoteDetailsClient({ noteId }: NoteDetailsProps) {
+export default function NotePreviewClient({ noteId }: NoteDetailsProps) {
   const router = useRouter();
 
   const {
