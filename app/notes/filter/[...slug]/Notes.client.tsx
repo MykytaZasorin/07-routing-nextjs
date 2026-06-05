@@ -9,12 +9,12 @@ import Pagination from "@/components/Pagination/Pagination";
 import SearchBox from "@/components/SearchBox/SearchBox";
 import Modal from "@/components/Modal/Modal";
 import NoteForm from "@/components/NoteForm/NoteForm";
-import { fetchNotes, FetchNotesResponse } from "@/lib/api/notes";
+import { fetchNotes, FetchNotesResponse } from "@/lib/api";
 
 const PER_PAGE = 12;
 
 interface NotesClientProps {
-  tag?: string;
+  tag?: string | string[];
 }
 
 export default function NotesClient({ tag }: NotesClientProps) {
@@ -23,20 +23,30 @@ export default function NotesClient({ tag }: NotesClientProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const queryClient = useQueryClient();
 
+  const currentTagString = Array.isArray(tag) ? tag[0] : tag || "all";
+
+  const [prevTag, setPrevTag] = useState(currentTagString);
+  if (currentTagString !== prevTag) {
+    setPrevTag(currentTagString);
+    setPage(1);
+  }
+
   const debouncedSearch = useDebouncedCallback((value: string) => {
     setPage(1);
     setSearch(value);
   }, 500);
 
+  const apiTag = currentTagString === "all" ? undefined : currentTagString;
+
   const { data, isLoading, isError } = useQuery<FetchNotesResponse>({
-    queryKey: ["notes", page, search, tag],
-    queryFn: () => fetchNotes({ page, perPage: PER_PAGE, search, tag }),
+    queryKey: ["notes", page, search, apiTag],
+    queryFn: () => fetchNotes({ page, perPage: PER_PAGE, search, tag: apiTag }),
     placeholderData: () =>
       queryClient.getQueryData<FetchNotesResponse>([
         "notes",
         page - 1,
         search,
-        tag,
+        apiTag,
       ]),
   });
 
@@ -56,7 +66,6 @@ export default function NotesClient({ tag }: NotesClientProps) {
         </div>
       </header>
 
-      {/* Лоадер показується тільки під час першого завантаження, сітку не ламає */}
       {isLoading && <div className={css.centeredLoading}>Loading...</div>}
 
       {isError && (
